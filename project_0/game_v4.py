@@ -14,19 +14,30 @@ def random_predict(number: int = 1) -> int:
     Returns:
         int: Число попыток
     """
+    # переменная счетчик попыток
     count = 0
+    
+    # переменные с начальными значениями для рандомного числа
     min_number = 1
     max_number = 101
 
     while True:
+        
         count += 1
-        predict_number = np.random.randint(min_number, max_number)  # предполагаемое число
+        # предполагаемое число
+        predict_number = np.random.randint(min_number, max_number)  
+        # если загаданное число больше сгенерированного,
+        # то меняем значение для минимального рандомного числа
         if number > predict_number:
             min_number = predict_number
+        # если загаданное число меньше сгенерированного,
+        # то меняем значение для максимального рандомного числа
         elif number < predict_number:
             max_number = predict_number
+        # выход из цикла если угадали
         if number == predict_number:
-            break  # выход из цикла если угадали
+            break
+    # возвращаем количество попыток
     return count
 
 
@@ -40,7 +51,7 @@ def score_game(random_predict) -> int:
         int: среднее количество попыток
     """
     count_ls = []
-    #np.random.seed(1)  # фиксируем сид для воспроизводимости
+    np.random.seed(1)  # фиксируем сид для воспроизводимости
     random_array = np.random.randint(1, 101, size=(1000))  # загадали список чисел
 
     for number in random_array:
